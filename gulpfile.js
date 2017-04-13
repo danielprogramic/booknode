@@ -49,10 +49,10 @@ gulp.task('serve', ['style', 'inject'], function() {
             'PORT': 3000
         },
         watch: jsFiles
-    }
+    };
 
     return nodemon(options)
         .on('restart', function(ev) {
             console.log('Restarting....');
-        })
+        });
 });
