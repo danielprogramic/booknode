@@ -3,6 +3,8 @@ var jshint = require('gulp-jshint');
 var jscs = require('gulp-jscs');
 var nodemon = require('gulp-nodemon');
 
+var prettify = require('gulp-jsbeautifier');
+
 var jsFiles = ['*.js', 'src/**/*.js'];
 
 gulp.task('style', function() {
@@ -41,7 +43,7 @@ gulp.task('inject', function() {
 
 });
 
-gulp.task('serve', ['style', 'inject'], function() {
+gulp.task('serve', ['pretty', 'style', 'inject'], function() {
     var options = {
         script: 'app.js',
         delayTime: 1,
@@ -55,4 +57,26 @@ gulp.task('serve', ['style', 'inject'], function() {
         .on('restart', function(ev) {
             console.log('Restarting....');
         });
+});
+
+gulp.task('pretty', function() { /*https://github.com/tarunc/gulp-jsbeautifier*/
+    gulp.src(['./src/routes/*.js'])
+        .pipe(prettify())
+        .pipe(gulp.dest('./src/routes'));
+
+    gulp.src(['./src/config/*.js'])
+        .pipe(prettify())
+        .pipe(gulp.dest('./src/config'));
+
+    gulp.src(['./src/controllers/*.js'])
+        .pipe(prettify())
+        .pipe(gulp.dest('./src/controllers'));
+
+    gulp.src(['./src/config/strategies/*.js'])
+        .pipe(prettify())
+        .pipe(gulp.dest('./src/config/strategies'));
+
+    gulp.src(['./*.js', './*.json', './.bowerrc'])
+        .pipe(prettify())
+        .pipe(gulp.dest('./'));
 });
