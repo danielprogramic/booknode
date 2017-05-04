@@ -72,6 +72,10 @@ gulp.task('pretty', function() { /*https://github.com/tarunc/gulp-jsbeautifier*/
         .pipe(prettify())
         .pipe(gulp.dest('./src/controllers'));
 
+    gulp.src(['./src/services/*.js'])
+        .pipe(prettify())
+        .pipe(gulp.dest('./src/services'));
+
     gulp.src(['./src/config/strategies/*.js'])
         .pipe(prettify())
         .pipe(gulp.dest('./src/config/strategies'));
