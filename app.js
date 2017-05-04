@@ -5,7 +5,7 @@ var passport = require('passport');
 var session = require('express-session');
 
 var app = express();
-var port = 5000;
+var port = process.env.PORT || 5000;
 var nav = [{
         Link: '/Books',
         Text: 'Books'
